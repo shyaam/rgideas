@@ -15,6 +15,18 @@
           <li>
             <%= link_to "home", root_url %>
 					</li>
+          <!--- adding devise user login section here -->
+          <li>
+          <% if user_signed_in? %>
+            Logged in as <strong><%= current_user.email %></strong>.
+            <%= link_to "edit profile", edit_user_registration_path, :class => 'navbar-link' %>
+            <%= link_to "logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+            <%= image_tag current_user.gravatar_url %>
+          <% else %>
+            <%= link_to "sign up", new_user_registration_path, :class => 'navbar-link' %>
+            <%= link_to "login", new_user_session_path, :class => 'navbar-link' %>
+          <% end %>
+          </li>
 					<li>
             <%= link_to "new idea", new_idea_path %>
 					</li>
@@ -22,7 +34,7 @@
             <%= link_to "about", pages_info_path %>
 					</li>
 					<li>
-						<%= link_to "contact", 'email_to:shyaam@aol.in' %>
+						<%= mail_to "shyaam@aol.in", 'contact' %>
 					</li>
 				</ul>
 
