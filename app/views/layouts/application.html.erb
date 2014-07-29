@@ -13,72 +13,57 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <!-- RailsGirls bootstrap theme -->
-  <link rel="stylesheet" href="//railsgirls.com/assets/bootstrap-theme.css" />
+  <!-- link rel="stylesheet" href="//railsgirls.com/assets/bootstrap-theme.css" / -->
 
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <!-- repair navigation -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">The Idea app</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/ideas">Ideas</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  <div class="container">
-    <div class="page-header">
-				<ul class="nav nav-pills pull-right">
-          <li>
-            <%= link_to "home", root_url %>
-					</li>
-          <!--- adding devise user login section here -->
-          <li>
-          <% if user_signed_in? %>
-            Logged in as <strong><%= current_user.email %></strong>.
-            <%= link_to "edit profile", edit_user_registration_path, :class => 'navbar-link' %>
-            <%= link_to "logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
-            <%= image_tag current_user.gravatar_url %>
-          <% else %>
-            <%= link_to "sign up", new_user_registration_path, :class => 'navbar-link' %>
-            <%= link_to "login", new_user_session_path, :class => 'navbar-link' %>
-          <% end %>
+  <header class="navbar navbar-default navbar-fixed-top" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img alt="LOGO" src="#" />
+          Ideas
+        </a>
+      </div>
+      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/ideas">Ideas</a></li>
+          <li ><%= link_to 'New Idea', new_idea_path %></li>
+          
+          <li class="dropdown">
+            <%= link_to "About", #, :class => 'dropdown-toggle' %>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Information", '#' %></li>
+              <li><%= mail_to "shyaam@aol.in", 'Contact' %></li>
+            </ul>
           </li>
-					<li>
-            <%= link_to "new idea", new_idea_path %>
-					</li>
-					<li>
-            <%= link_to "about", pages_info_path %>
-					</li>
-					<li>
-						<%= mail_to "shyaam@aol.in", 'contact' %>
-					</li>
-				</ul>
-
-				<h1>
-          <%= link_to "IDEAS", root_url %>
-					<small>// what's your brain smackin' big idea?</small>
-				</h1>	
-			</div>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <% if user_signed_in? %>
+              Logged in as <strong><%= image_tag current_user.gravatar_url %><%= current_user.email %></strong>.
+              <%= link_to "edit profile", edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>  
+            <% else %>
+              <%= link_to "sign up", new_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "login", new_user_session_path, :class => 'navbar-link' %>
+            <% end %>
+          </li>
+        </ul>
     </div>
-<!-- end of navigation -->
+  </header>
 
 <div class="container">
+  <h1><small>What's your brain smackin' idea?</small></h1>
   <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
   <% end %>
@@ -89,7 +74,7 @@
 </div>
   <footer>
   <div class="container">
-    Rails Girls &copy; 2014. <div class="pull-right">made with &hearts; in Vita, India by <%= link_to "shyaam deshmukh", 'http://github.com/shyaam' %>.</div>
+    Rails Girls &copy; 2014. <div class="pull-right">made with &hearts; in vita, india by <%= link_to "shyaam deshmukh", 'http://github.com/shyaam' %>.</div>
   </div>
 </footer>
 <br><script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
